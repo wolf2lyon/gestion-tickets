@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import JsBarcode from 'jsbarcode';
 import { Product } from '../types';
 
+// Codigo de ejemplo
+
 interface LabelProps {
   product: Product;
 }
