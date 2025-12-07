@@ -90,6 +90,7 @@
   font-size: 10pt;
   color: #333;
   line-height: 1;
+  font-weight: 800;
 }
 
 .label-footer {
@@ -113,6 +114,7 @@
   font-size: 6pt;
   margin: 0 0 2px 0;
   color: #333;
+  font-weight: 800;
 }
 
 .label-barcode {
@@ -143,9 +145,23 @@
 }
 
 @media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
   body {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+
+  body>div {
+    min-height: auto !important;
+    height: auto !important;
   }
 
   .no-print {
@@ -153,11 +169,25 @@
   }
 
   .print-area {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 6cm);
+    column-gap: 0.4cm;
+    /* espacio horizontal entre columnas */
+    row-gap: 0.3cm;
+    /* espacio vertical entre filas */
+    padding: 0.5cm;
     background: white;
+    justify-content: center;
+    min-height: auto;
+    /* evita espacio extra */
+  }
+
+  /* Evitar página en blanco al final */
+  .print-area::after {
+    content: "";
+    display: block;
+    height: 0;
+    page-break-after: avoid;
   }
 
   .label-container {
@@ -170,5 +200,11 @@
   @page {
     size: auto;
     margin: 1cm;
+  }
+
+  @page :blank {
+    @bottom-center {
+      content: none;
+    }
   }
 }

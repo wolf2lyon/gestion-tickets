@@ -59,7 +59,7 @@ export function PrintArea({ selectedProducts, onClear }: PrintAreaProps) {
         </div>
       </div>
 
-      <div className="print-area">
+      <div className="print-area" style={{ pageBreakAfter: 'avoid' }}>
         {renderLabels()}
       </div>
     </div>

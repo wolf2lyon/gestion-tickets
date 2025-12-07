@@ -53,7 +53,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 print:min-h-0 print:h-auto">
       <div className="no-print">
         <header className="bg-blue-600 text-white py-6 shadow-lg">
           <div className="container mx-auto px-4">
