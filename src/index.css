@@ -169,13 +169,8 @@
   }
 
   .print-area {
-    display: grid;
-    grid-template-columns: repeat(3, 6cm);
-    column-gap: 0.4cm;
-    /* espacio horizontal entre columnas */
-    row-gap: 0.3cm;
-    /* espacio vertical entre filas */
-    padding: 0.5cm;
+    display: flex;
+    gap: 0.4cm 0.3cm;
     background: white;
     justify-content: center;
     min-height: auto;
