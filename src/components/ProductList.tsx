@@ -26,6 +26,13 @@ export function ProductList({ products, onAddProduct }: ProductListProps) {
     }));
   };
 
+  const handleSelectAll = () => {
+    products.forEach((product) => {
+      const cantidad = selectedQuantities[product.codigo] || 1;
+      onAddProduct(product, cantidad)
+    })
+  }
+
   if (products.length === 0) {
     return (
       <div className="text-center py-12 text-gray-500">
@@ -36,6 +43,18 @@ export function ProductList({ products, onAddProduct }: ProductListProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="p-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
+        <p className="text-sm text-gray-600">
+          Mostrando {products.length} producto{products.length !== 1 ? 's' : ''}
+        </p>
+        <button
+          onClick={handleSelectAll}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm font-medium"
+        >
+          <Plus size={16} />
+          Seleccionar Todos
+        </button>
+      </div>
       <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
         <table className="w-full">
           <thead className="bg-gray-50 border-b border-gray-200">

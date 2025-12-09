@@ -52,6 +52,10 @@ function App() {
     setSelectedProducts([]);
   };
 
+  const handleRemoveProduct = (index: number) => {
+    setSelectedProducts((prev) => prev.filter((_, i) => i !== index))
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 print:min-h-0 print:h-auto">
       <div className="no-print">
@@ -108,12 +112,13 @@ function App() {
         </main>
       </div>
       {/* PrintArea FUERA del div no-print */}
-    {products.length > 0 && (
-      <PrintArea
-        selectedProducts={selectedProducts}
-        onClear={handleClearSelected}
-      />
-    )}
+      {products.length > 0 && (
+        <PrintArea
+          selectedProducts={selectedProducts}
+          onClear={handleClearSelected}
+          onRemoveProduct={handleRemoveProduct}
+        />
+      )}
     </div>
   );
 }
