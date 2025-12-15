@@ -1,5 +1,6 @@
 {
   "name": "vite-react-typescript-starter",
+  "homepage": "https://wolf2lyon.github.io/gestion-tickets/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
