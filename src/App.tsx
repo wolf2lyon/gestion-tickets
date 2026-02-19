@@ -78,20 +78,23 @@ function App() {
             <div className="max-w-2xl mx-auto">
               <FileUpload onDataLoaded={handleDataLoaded} />
               <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-6">
-                <h3 className="font-semibold text-blue-900 mb-2">
-                  Formato de archivo requerido:
+                <h3 className="font-semibold text-blue-900 mb-3">
+                  Formato de archivo requerido (nombres de columnas aceptados):
                 </h3>
-                <ul className="text-sm text-blue-800 space-y-1">
-                  <li>• Codigo</li>
-                  <li>• Descripcion</li>
-                  <li>• Categoria</li>
-                  <li>• Codigo de Barras</li>
-                  <li>• Unidad de Medida</li>
-                  <li>• Moneda</li>
-                  <li>• Precio</li>
-                  <li>• Origen</li>
-                  <li>• Nombre Empresa</li>
+                <ul className="text-sm text-blue-800 space-y-2">
+                  <li>• <strong>Código:</strong> Código, CÓDIGO, SKU</li>
+                  <li>• <strong>Descripción:</strong> Descripción, DESCRIPCIÓN, Producto, PRODUCTO</li>
+                  <li>• <strong>Categoría:</strong> Categoría, CATEGORÍA, Tipo de Producto</li>
+                  <li>• <strong>Código de Barras:</strong> Código de Barras, CÓDIGO DE BARRAS</li>
+                  <li>• <strong>Unidad de Medida:</strong> Unidad de Medida, UNIDAD DE MEDIDA</li>
+                  <li>• <strong>Moneda:</strong> Moneda, MONEDA</li>
+                  <li>• <strong>Precio:</strong> Precio, PRECIO, Precio Venta Bruto, PRECIO VENTA BRUTO</li>
+                  <li>• <strong>Origen:</strong> Origen, País, Pais</li>
+                  <li>• <strong>Nombre Empresa:</strong> Nombre Empresa, Empresa</li>
                 </ul>
+                <p className="text-xs text-blue-700 mt-3">
+                  Tip: El sistema detecta automáticamente múltiples variantes de nombres de columnas
+                </p>
               </div>
             </div>
           ) : (

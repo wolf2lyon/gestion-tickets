@@ -10,6 +10,16 @@ interface FileUploadProps {
 export function FileUpload({ onDataLoaded }: FileUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Función helper para buscar un valor usando múltiples nombres de columna
+  const getColumnValue = (row: any, columnNames: string[]): any => {
+    for (const name of columnNames) {
+      if (row[name] !== undefined && row[name] !== null && row[name] !== '') {
+        return row[name];
+      }
+    }
+    return '';
+  };
+
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
 
@@ -23,15 +33,32 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
         console.log(jsonData)
 
         const products: Product[] = jsonData.map((row: any) => ({
-          codigo: String(row.CÓDIGO || row.CÓDIGO || ''),
-          descripcion: String(row.DESCRIPCIÓN || row.DESCRIPCIÓN || ''),
-          categoria: String(row.CATEGORIA || row.CATEGORIA || ''),
-          codigoBarras: String(row['CODIGO DE BARRAS'] || row.codigoBarras || row['Código de Barras'] || ''),
-          unidadMedida: String(row['UNIDAD DE MEDIDA'] || row.unidadMedida || ''),
-          moneda: String(row.MONEDA || row.MONEDA || '$'),
-          precio: parseFloat(row['PRECIO UNITARIO'] || row.precio || 0),
-          origen: String(row.Origen || row.origen || row.Pais || row.País || ''),
-          nombreEmpresa: String(row['Nombre Empresa'] || row.nombreEmpresa || row.Empresa || ''),
+          // Código o SKU
+          codigo: String(getColumnValue(row, ['CÓDIGO', 'Código', 'SKU', 'CODIGO']) || ''),
+          
+          // Descripción o Producto
+          descripcion: String(getColumnValue(row, ['DESCRIPCIÓN', 'Descripción', 'Descripcion', 'DESCRIPCION', 'Producto', 'PRODUCTO']) || ''),
+          
+          // Categoría o Tipo de Producto
+          categoria: String(getColumnValue(row, ['CATEGORIA', 'Categoria', 'Categoría', 'CATEGORÍA', 'Tipo de Producto', 'TIPO DE PRODUCTO']) || ''),
+          
+          // Código de Barras (con o sin tilde, con o sin "de")
+          codigoBarras: String(getColumnValue(row, ['CODIGO DE BARRAS', 'Codigo de Barras', 'Código de Barras', 'CÓDIGO DE BARRAS', 'Código Barras', 'CÓDIGO BARRAS', 'Codigo Barras', 'codigoBarras']) || ''),
+          
+          // Unidad de Medida
+          unidadMedida: String(getColumnValue(row, ['UNIDAD DE MEDIDA', 'Unidad de Medida', 'unidadMedida']) || ''),
+          
+          // Moneda (por defecto Soles)
+          moneda: String(getColumnValue(row, ['MONEDA', 'Moneda', 'moneda']) || 'S/'),
+          
+          // Precio o Precio Venta Bruto
+          precio: parseFloat(getColumnValue(row, ['PRECIO UNITARIO', 'Precio Unitario', 'PRECIO', 'Precio', 'precio', 'Precio Venta Bruto', 'PRECIO VENTA BRUTO']) || 0),
+          
+          // Origen
+          origen: String(getColumnValue(row, ['Origen', 'origen', 'ORIGEN', 'Pais', 'País', 'PAÍS']) || ''),
+          
+          // Nombre Empresa
+          nombreEmpresa: String(getColumnValue(row, ['Nombre Empresa', 'nombreEmpresa', 'NOMBRE EMPRESA', 'Empresa', 'EMPRESA']) || ''),
         }));
 
         onDataLoaded(products);
