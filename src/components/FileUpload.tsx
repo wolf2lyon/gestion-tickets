@@ -48,8 +48,8 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
           // Unidad de Medida
           unidadMedida: String(getColumnValue(row, ['UNIDAD DE MEDIDA', 'Unidad de Medida', 'unidadMedida']) || ''),
           
-          // Moneda (por defecto Soles)
-          moneda: String(getColumnValue(row, ['MONEDA', 'Moneda', 'moneda']) || 'S/'),
+          // Moneda (por defecto PEN)
+          moneda: String(getColumnValue(row, ['MONEDA', 'Moneda', 'moneda']) || 'PEN'),
           
           // Precio o Precio Venta Bruto
           precio: parseFloat(getColumnValue(row, ['PRECIO UNITARIO', 'Precio Unitario', 'PRECIO', 'Precio', 'precio', 'Precio Venta Bruto', 'PRECIO VENTA BRUTO']) || 0),
